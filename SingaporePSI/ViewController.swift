@@ -87,6 +87,13 @@ class ViewController: UIViewController {
         return markerView
     }
     
+    @IBAction func buttonRefreshPressed(_ sender: Any) {
+        self.mapView?.clear()
+        self.mapView?.animate(to: GMSCameraPosition.camera(withLatitude: 1.35735, longitude: 103.82, zoom: 10.5))
+        
+        //reload latest PSI data
+        self.loadLatestPSI()
+    }
     
 }
 
