@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet var viewMap: UIView!
     @IBOutlet var labelLatestUpdate: UILabel!
     @IBOutlet var viewInfoLastUpdated: UIView!
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         let camera = GMSCameraPosition.camera(withLatitude: 1.35735, longitude: 103.82, zoom: 10.5) //center of singapore
         
         self.mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
-        
+        self.mapView?.delegate = self
         self.viewMap.addSubview(self.mapView!)
     }
     
@@ -50,6 +50,7 @@ class ViewController: UIViewController {
                     
                     self.viewInfoLastUpdated.isHidden = false
                     self.viewInfoLastUpdated.alpha = 1.0
+                    self.fadeOutLastUpdatedInfo()
                 }
             } else {
                 //request failed, should do something about it
@@ -87,12 +88,28 @@ class ViewController: UIViewController {
         return markerView
     }
     
+    func fadeOutLastUpdatedInfo() {
+        UIView.animate(withDuration: 1.5, delay: 4.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            self.viewInfoLastUpdated.alpha = 0.0
+        }, completion: nil)
+    }
+    
     @IBAction func buttonRefreshPressed(_ sender: Any) {
         self.mapView?.clear()
         self.mapView?.animate(to: GMSCameraPosition.camera(withLatitude: 1.35735, longitude: 103.82, zoom: 10.5))
         
         //reload latest PSI data
         self.loadLatestPSI()
+    }
+    
+    // MARK: GMSMapViewDelegate
+    
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+        self.viewInfoLastUpdated.alpha = 1.0
+    }
+    
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        self.fadeOutLastUpdatedInfo()
     }
     
 }
