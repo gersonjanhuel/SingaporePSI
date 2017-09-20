@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         
         let camera = GMSCameraPosition.camera(withLatitude: 1.35735, longitude: 103.82, zoom: 10.5) //center of singapore
         
-        self.mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)        
+        self.mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
         
         self.viewMap.addSubview(self.mapView!)
     }
@@ -64,10 +64,27 @@ class ViewController: UIViewController {
         for item in PSI {
             let markerCentral = GMSMarker()
             markerCentral.position = CLLocationCoordinate2DMake(item.latitude, item.longitude)
+            markerCentral.iconView = self.customMarkerView(item.psi);
             markerCentral.title = item.locationName.capitalized
             markerCentral.snippet = "PSI = \(item.psi)"
             markerCentral.map = self.mapView
         }
+    }
+    
+    func customMarkerView(_ psi: Int) -> UIView {
+        let markerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 42, height: 42))
+        let pinImageView: UIImageView = UIImageView(image: UIImage(named: "marker_custom"))
+        
+        let label: UILabel = UILabel(frame: CGRect(x: 10, y: 7, width: 25, height: 20))
+        label.text = "\(psi)"
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name: "Avenir-Medium", size: 18)
+        label.textColor = UIColor.init(red: 78/225.0, green: 179/225.0, blue: 240/225.0, alpha: 1.0)
+        
+        pinImageView.addSubview(label)
+        markerView.addSubview(pinImageView)
+        
+        return markerView
     }
     
     
