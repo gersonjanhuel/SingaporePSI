@@ -10,13 +10,16 @@ import UIKit
 import GoogleMaps
 
 class ViewController: UIViewController {
-
-    var mapView:GMSMapView?
+    
+    @IBOutlet var loadingIndicator: UIActivityIndicatorView!
+    
+    var mapView:GMSMapView?    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.showMap()
+        self.loadLatestPSI()
     }
     
     func showMap() {
@@ -27,6 +30,32 @@ class ViewController: UIViewController {
         self.mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
         
         self.view = self.mapView
+    }
+    
+    func loadLatestPSI() {
+        self.loadingIndicator.isHidden = false
+        
+        PSIManager.sharedInstance.getPSI() { (dataPSI, isSuccess, message) in
+            if (isSuccess) {
+                self.showPSI(dataPSI)
+                
+            } else {
+                //request failed, should do something about it
+                print("Alert this: \(message)")
+            }
+            
+            self.loadingIndicator.isHidden = true
+        }
+    }
+    
+    func showPSI(_ PSI: [PSI]) {
+        for item in PSI {
+            let markerCentral = GMSMarker()
+            markerCentral.position = CLLocationCoordinate2DMake(item.latitude, item.longitude)
+            markerCentral.title = item.locationName.capitalized
+            markerCentral.snippet = "PSI = \(item.psi)"
+            markerCentral.map = self.mapView
+        }
     }
     
 }

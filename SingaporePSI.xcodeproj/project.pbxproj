@@ -12,6 +12,7 @@
 		7C7CB2C61F72285C006C94D6 /* PSI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CB2C51F72285C006C94D6 /* PSI.swift */; };
 		7C7CB2C81F7229BE006C94D6 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CB2C71F7229BE006C94D6 /* APIManager.swift */; };
 		7C7CB2CA1F722A61006C94D6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CB2C91F722A61006C94D6 /* Response.swift */; };
+		7C7CB2CC1F722BE3006C94D6 /* PSIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CB2CB1F722BE3006C94D6 /* PSIManager.swift */; };
 		7CE2A3131F6F844A00D84721 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE2A3121F6F844A00D84721 /* AppDelegate.swift */; };
 		7CE2A3151F6F844A00D84721 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE2A3141F6F844A00D84721 /* ViewController.swift */; };
 		7CE2A3181F6F844A00D84721 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE2A3161F6F844A00D84721 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 		7C7CB2C51F72285C006C94D6 /* PSI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PSI.swift; sourceTree = "<group>"; };
 		7C7CB2C71F7229BE006C94D6 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		7C7CB2C91F722A61006C94D6 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		7C7CB2CB1F722BE3006C94D6 /* PSIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PSIManager.swift; sourceTree = "<group>"; };
 		7CE2A30F1F6F844A00D84721 /* SingaporePSI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingaporePSI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CE2A3121F6F844A00D84721 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CE2A3141F6F844A00D84721 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,7 +49,7 @@
 		7CE2A3231F6F844B00D84721 /* SingaporePSITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SingaporePSITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CE2A3271F6F844B00D84721 /* SingaporePSITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingaporePSITests.swift; sourceTree = "<group>"; };
 		7CE2A3291F6F844B00D84721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7CE2A3381F6F882700D84721 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		7CE2A3381F6F882700D84721 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E32E7D05ECFEF9662A6057D5 /* Pods_SingaporePSI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SingaporePSI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0D8B5D346B75884511DEBF5 /* Pods-SingaporePSI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingaporePSI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SingaporePSI/Pods-SingaporePSI.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 		7CE2A3341F6F877300D84721 /* Model Manager */ = {
 			isa = PBXGroup;
 			children = (
+				7C7CB2CB1F722BE3006C94D6 /* PSIManager.swift */,
 			);
 			name = "Model Manager";
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				7CE2A3131F6F844A00D84721 /* AppDelegate.swift in Sources */,
 				7C7CB2CA1F722A61006C94D6 /* Response.swift in Sources */,
 				7C7CB2C41F722795006C94D6 /* Constants.swift in Sources */,
+				7C7CB2CC1F722BE3006C94D6 /* PSIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
