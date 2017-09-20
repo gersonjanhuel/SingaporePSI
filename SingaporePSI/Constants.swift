@@ -19,4 +19,7 @@ struct Constants {
         static let key = "AIzaSyAVhx9JfocUamLXRBeBY0mia2R5G5MfyNk"
     }
     
+    struct DefaultsKeys {
+        static let keyLastUpdatedInfo = "LastUpdatedInfo"
+    }
 }

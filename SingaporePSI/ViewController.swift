@@ -10,7 +10,9 @@ import UIKit
 import GoogleMaps
 
 class ViewController: UIViewController {
-    
+    @IBOutlet var viewMap: UIView!
+    @IBOutlet var labelLatestUpdate: UILabel!
+    @IBOutlet var viewInfoLastUpdated: UIView!
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     
     var mapView:GMSMapView?    
@@ -20,6 +22,9 @@ class ViewController: UIViewController {
         
         self.showMap()
         self.loadLatestPSI()
+        
+        self.viewInfoLastUpdated.layer.cornerRadius = 2
+        self.viewInfoLastUpdated.isHidden = true
     }
     
     func showMap() {
@@ -27,9 +32,9 @@ class ViewController: UIViewController {
         
         let camera = GMSCameraPosition.camera(withLatitude: 1.35735, longitude: 103.82, zoom: 10.5) //center of singapore
         
-        self.mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
+        self.mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)        
         
-        self.view = self.mapView
+        self.viewMap.addSubview(self.mapView!)
     }
     
     func loadLatestPSI() {
@@ -39,6 +44,13 @@ class ViewController: UIViewController {
             if (isSuccess) {
                 self.showPSI(dataPSI)
                 
+                let defaults = UserDefaults.standard
+                if let lastUpdatedInfo = defaults.string(forKey: Constants.DefaultsKeys.keyLastUpdatedInfo) {
+                    self.labelLatestUpdate.text = lastUpdatedInfo
+                    
+                    self.viewInfoLastUpdated.isHidden = false
+                    self.viewInfoLastUpdated.alpha = 1.0
+                }
             } else {
                 //request failed, should do something about it
                 print("Alert this: \(message)")
@@ -57,6 +69,7 @@ class ViewController: UIViewController {
             markerCentral.map = self.mapView
         }
     }
+    
     
 }
 
