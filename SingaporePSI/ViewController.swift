@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         
         self.showMap()
     }
-
+    
     func showMap() {
         GMSServices.provideAPIKey(Constants.GoogleMapAPI.key)
         

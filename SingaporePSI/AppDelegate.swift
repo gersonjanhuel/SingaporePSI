@@ -20,8 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         
-        UIApplication.shared.statusBarStyle = .lightContent
-        
         return true
     }
 
