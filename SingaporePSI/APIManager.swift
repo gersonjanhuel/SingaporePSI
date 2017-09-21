@@ -24,7 +24,7 @@ class APIManager: NSObject {
                 completion(successResponse)
             case .failure(let error):
                 let emptyJSON = JSON(["data":[]])
-                let failureResponse = Response(isSuccess: false, data: emptyJSON, message: "Request failed with error: \(error)")
+                let failureResponse = Response(isSuccess: false, data: emptyJSON, message: "Request failed. \(error.localizedDescription)")
                 completion(failureResponse)
             }
         }
