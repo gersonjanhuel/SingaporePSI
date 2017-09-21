@@ -20,7 +20,36 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_icon" translatesAutoresizingMaskIntoConstraints="NO" id="PgP-3k-Mig">
+                                <rect key="frame" x="127.5" y="273" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="ECU-ft-7Ul"/>
+                                    <constraint firstAttribute="width" constant="120" id="OsD-DU-q0h"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Singapore" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5C-Wb-57u">
+                                <rect key="frame" x="150" y="379" width="75" height="21"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pollutant Standards Index (PSI)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4z7-KH-Dur">
+                                <rect key="frame" x="84.5" y="400" width="205.5" height="21"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Italic" family="Avenir Next" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="0.30588235289999999" green="0.70196078429999997" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="J5C-Wb-57u" firstAttribute="centerX" secondItem="PgP-3k-Mig" secondAttribute="centerX" id="2Ih-f8-mk0"/>
+                            <constraint firstItem="4z7-KH-Dur" firstAttribute="top" secondItem="J5C-Wb-57u" secondAttribute="bottom" id="4bJ-2N-Cw0"/>
+                            <constraint firstItem="J5C-Wb-57u" firstAttribute="top" secondItem="PgP-3k-Mig" secondAttribute="bottom" constant="-14" id="J33-ej-cEi"/>
+                            <constraint firstItem="PgP-3k-Mig" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="q26-bx-AsN"/>
+                            <constraint firstItem="PgP-3k-Mig" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="usc-gg-r4N"/>
+                            <constraint firstItem="4z7-KH-Dur" firstAttribute="centerX" secondItem="J5C-Wb-57u" secondAttribute="centerX" id="xA8-pX-W5O"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -28,4 +57,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="app_icon" width="120" height="120"/>
+    </resources>
 </document>
