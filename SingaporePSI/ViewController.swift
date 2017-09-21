@@ -13,9 +13,15 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet var viewMap: UIView!
     @IBOutlet var labelLatestUpdate: UILabel!
     @IBOutlet var viewInfoLastUpdated: UIView!
+    @IBOutlet var viewModalContainer: UIView!
+    @IBOutlet var buttonCloseModal: UIButton!
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     
-    var mapView:GMSMapView?    
+    var mapView: GMSMapView?
+    var viewModal: ModalView!
+    
+    var latestPSI: [PSI] = []
+    var latestUpdate: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +30,11 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         self.loadLatestPSI()
         
         self.viewInfoLastUpdated.layer.cornerRadius = 2
-        self.viewInfoLastUpdated.isHidden = true
+        
+        self.viewModalContainer.isHidden = true
+        self.buttonCloseModal.isHidden = true
+        
+        
     }
     
     func showMap() {
@@ -47,8 +57,6 @@ class ViewController: UIViewController, GMSMapViewDelegate {
                 let defaults = UserDefaults.standard
                 if let lastUpdatedInfo = defaults.string(forKey: Constants.DefaultsKeys.keyLastUpdatedInfo) {
                     self.labelLatestUpdate.text = lastUpdatedInfo
-                    
-                    self.viewInfoLastUpdated.isHidden = false
                     self.viewInfoLastUpdated.alpha = 1.0
                     self.fadeOutLastUpdatedInfo()
                 }
@@ -70,6 +78,8 @@ class ViewController: UIViewController, GMSMapViewDelegate {
             markerCentral.snippet = "PSI = \(item.psi)"
             markerCentral.map = self.mapView
         }
+        
+        self.latestPSI = PSI
     }
     
     func customMarkerView(_ psi: Int) -> UIView {
@@ -98,8 +108,25 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         self.mapView?.clear()
         self.mapView?.animate(to: GMSCameraPosition.camera(withLatitude: 1.35735, longitude: 103.82, zoom: 10.5))
         
-        //reload latest PSI data
         self.loadLatestPSI()
+    }
+    
+    @IBAction func buttonShowListPressed(_ sender: Any) {
+        self.viewModal = ModalView.instanceFromNib() as? ModalView
+        self.viewModalContainer.isHidden = false
+        self.viewModalContainer.addSubview(self.viewModal)
+        
+        self.viewModal.showModalWithDataPSI(self.latestPSI, lastUpdatedInfo: self.labelLatestUpdate.text!, frame: self.view.frame) {
+            self.buttonCloseModal.isHidden = false
+        }
+    }
+    
+    @IBAction func buttonCloseModalPressed(_ sender: Any) {
+        self.viewModal.hideModal(self.viewModal.frame) { 
+            self.buttonCloseModal.isHidden = true
+            self.viewModalContainer.isHidden = true
+            self.viewModal.removeFromSuperview()
+        }
     }
     
     // MARK: GMSMapViewDelegate

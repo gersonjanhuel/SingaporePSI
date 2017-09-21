@@ -51,7 +51,7 @@ class PSIManager: NSObject {
                     
                     // save/update last updated info to local
                     let defaults = UserDefaults.standard
-                    defaults.set("Last updated \(dataJSON["items"][0]["update_timestamp"])", forKey: Constants.DefaultsKeys.keyLastUpdatedInfo)
+                    defaults.set("Last updated : \(dataJSON["items"][0]["update_timestamp"])", forKey: Constants.DefaultsKeys.keyLastUpdatedInfo)
                     
                     completion(dataPSI, response.isSuccess, response.message)
                 } else {
