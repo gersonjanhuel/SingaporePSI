@@ -35,6 +35,7 @@ class PSIManager: NSObject {
                     var dataPSI:[PSI] = [PSI]() //init
                     
                     let regions = dataJSON["region_metadata"]
+                    let lastUpdated = dataJSON["items"][0]["update_timestamp"].string!
                     
                     for (_,region):(String, JSON) in regions {
                         
@@ -51,7 +52,7 @@ class PSIManager: NSObject {
                     
                     // save/update last updated info to local
                     let defaults = UserDefaults.standard
-                    defaults.set("Last updated : \(dataJSON["items"][0]["update_timestamp"])", forKey: Constants.DefaultsKeys.keyLastUpdatedInfo)
+                    defaults.set("Last updated at \(lastUpdated.stringDateWithFormat("dd MMM yyyy, HH:mm", timezone: "UTC+08")) (SGT)", forKey: Constants.DefaultsKeys.keyLastUpdatedInfo)
                     
                     completion(dataPSI, response.isSuccess, response.message)
                 } else {
