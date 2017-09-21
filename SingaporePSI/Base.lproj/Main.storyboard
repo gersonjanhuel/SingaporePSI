@@ -25,9 +25,6 @@
                                 <rect key="frame" x="-0.5" y="-0.5" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gq4-Ey-7Xl">
-                                <rect key="frame" x="177" y="323" width="20" height="20"/>
-                            </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JdI-pz-U5e">
                                 <rect key="frame" x="25" y="89" width="325" height="20"/>
                                 <subviews>
@@ -92,8 +89,6 @@
                             <constraint firstItem="fmA-EV-SwR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="N3x-jI-asR"/>
                             <constraint firstAttribute="trailing" secondItem="JdI-pz-U5e" secondAttribute="trailing" constant="25" id="ON7-jP-EWu"/>
                             <constraint firstItem="JdI-pz-U5e" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="25" id="OvY-fv-WqZ"/>
-                            <constraint firstItem="gq4-Ey-7Xl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sv0-Tg-dSq"/>
-                            <constraint firstItem="gq4-Ey-7Xl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="TWp-Oz-arg"/>
                             <constraint firstItem="lDQ-1A-ySn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="25" id="YHX-Av-ddm"/>
                             <constraint firstItem="I02-F3-IAY" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="ZVl-76-KjG"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6Hv-Hs-vbC" secondAttribute="bottom" constant="25" id="fxk-yy-j2M"/>
@@ -110,7 +105,6 @@
                     <connections>
                         <outlet property="buttonCloseModal" destination="8kJ-h2-Hfj" id="eGG-n7-sSV"/>
                         <outlet property="labelLatestUpdate" destination="Pik-c1-Ip1" id="MwR-VJ-4C1"/>
-                        <outlet property="loadingIndicator" destination="gq4-Ey-7Xl" id="vE4-5E-iJD"/>
                         <outlet property="viewInfoLastUpdated" destination="JdI-pz-U5e" id="RJB-xV-kZV"/>
                         <outlet property="viewMap" destination="fmA-EV-SwR" id="t2a-EO-BeW"/>
                         <outlet property="viewModalContainer" destination="I02-F3-IAY" id="0qr-eE-88x"/>
