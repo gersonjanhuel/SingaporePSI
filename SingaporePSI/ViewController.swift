@@ -15,7 +15,6 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet var viewInfoLastUpdated: UIView!
     @IBOutlet var viewModalContainer: UIView!
     @IBOutlet var buttonCloseModal: UIButton!
-    @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     
     var mapView: GMSMapView?
     var viewModal: ModalView!
@@ -29,12 +28,11 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         self.showMap()
         self.loadLatestPSI()
         
-        self.viewInfoLastUpdated.layer.cornerRadius = 2
-        
+        self.viewInfoLastUpdated.isHidden = true
         self.viewModalContainer.isHidden = true
         self.buttonCloseModal.isHidden = true
         
-        
+        self.viewInfoLastUpdated.layer.cornerRadius = 5
     }
     
     func showMap() {
@@ -48,7 +46,7 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     }
     
     func loadLatestPSI() {
-        self.loadingIndicator.isHidden = false
+        LoadingIndicatorView.shared.showLoading(self.view)
         
         PSIManager.sharedInstance.getPSI() { (dataPSI, isSuccess, message) in
             if (isSuccess) {
@@ -57,15 +55,17 @@ class ViewController: UIViewController, GMSMapViewDelegate {
                 let defaults = UserDefaults.standard
                 if let lastUpdatedInfo = defaults.string(forKey: Constants.DefaultsKeys.keyLastUpdatedInfo) {
                     self.labelLatestUpdate.text = lastUpdatedInfo
-                    self.viewInfoLastUpdated.alpha = 1.0
+                    self.viewInfoLastUpdated.isHidden = false
                     self.fadeOutLastUpdatedInfo()
                 }
             } else {
-                //request failed, should do something about it
-                print("Alert this: \(message)")
+                //request failed
+                let alert = UIAlertController(title: "Upsss!", message: message, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
             
-            self.loadingIndicator.isHidden = true
+            LoadingIndicatorView.shared.hideLoading()
         }
     }
     
@@ -73,7 +73,7 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         for item in PSI {
             let markerCentral = GMSMarker()
             markerCentral.position = CLLocationCoordinate2DMake(item.latitude, item.longitude)
-            markerCentral.iconView = self.customMarkerView(item.psi);
+            markerCentral.iconView = MarkerView.shared.customMarkerViewWithPSI(item.psi)
             markerCentral.title = item.locationName.capitalized
             markerCentral.snippet = "PSI = \(item.psi)"
             markerCentral.map = self.mapView
@@ -82,23 +82,8 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         self.latestPSI = PSI
     }
     
-    func customMarkerView(_ psi: Int) -> UIView {
-        let markerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 42, height: 42))
-        let pinImageView: UIImageView = UIImageView(image: UIImage(named: "marker_custom"))
-        
-        let label: UILabel = UILabel(frame: CGRect(x: 10, y: 7, width: 25, height: 20))
-        label.text = "\(psi)"
-        label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont(name: "Avenir-Medium", size: 18)
-        label.textColor = UIColor.init(red: 78/225.0, green: 179/225.0, blue: 240/225.0, alpha: 1.0)
-        
-        pinImageView.addSubview(label)
-        markerView.addSubview(pinImageView)
-        
-        return markerView
-    }
-    
     func fadeOutLastUpdatedInfo() {
+        self.viewInfoLastUpdated.alpha = 1.0
         UIView.animate(withDuration: 1.5, delay: 4.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
             self.viewInfoLastUpdated.alpha = 0.0
         }, completion: nil)
